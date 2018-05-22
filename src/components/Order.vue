@@ -70,7 +70,6 @@
 </template>
 <script>
 import { mapMutations, mapState, mapActions } from 'vuex'
-import Cookies from 'js-cookie'
 import { placeApi, getOrderApi, updateSeatApi, webSocketApi } from '@/api'
 export default {
   data () {
@@ -144,7 +143,7 @@ export default {
       })
     },
     dishes () {
-      this.$router.push({path: '/', query: {tableId: Cookies.get('tableId')}})
+      this.$router.push({path: '/'})
     },
     getOrder () {
       placeApi().then(({data}) => {

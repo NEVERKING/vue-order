@@ -15,7 +15,7 @@
                                     <p class='list-price'>¥{{product.price}}</p>
                                 </div>
                                 <button v-if="product.state === 0" @click='showDetail(product)' class='add-product'>添加</button>
-                                <button v-if="product.state === 1" class='disabled-product'>告罄</button>
+                                <button v-if="product.state === 1" class='disabled-product'>售罄</button>
                             </div>
                         </yd-list-other>
                     </yd-list-item>
@@ -50,7 +50,6 @@
 import { getProductListApi, webSocketApi } from '@/api'
 import ShowDetail from './ShowDetail'
 import ShowCar from './ShowCar'
-import Cookies from 'js-cookie'
 import {mapMutations, mapState, mapActions} from 'vuex'
 export default {
   data () {
@@ -75,7 +74,6 @@ export default {
     webSocketApi(() => {
       this.refreshCar()
     })
-    Cookies.set('tableId', this.$route.query.tableId)
     // 获取购物车信息
     this.refreshCar()
   },

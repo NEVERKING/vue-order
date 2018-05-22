@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-axios.defaults.baseURL = 'http://120.78.165.70'
+axios.defaults.baseURL = 'http://order.voltmao.com/api'
 axios.defaults.headers.common['Authorization'] = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiMjAxOCIsInVuaXF1ZV9uYW1lIjoiMjAxOCIsInVzZXJpZCI6IjIwMTgiLCJpc3MiOiJyZXN0YXBpdXNlciIsImF1ZCI6IjA5OGY2YmNkNDYyMWQzNzNjYWRlNGU4MzI2MjdiNGY2IiwiZXhwIjoxNTI2OTYwNjEzLCJuYmYiOjE1MjY3ODc4MTN9.NhRUDwOLxuLLgUiAcR9cjZlqaeqGLNKnfqDGc0_dUZU'
 const openId = Cookies.get('openId') || 'oOojD1L0z3FdADqZKjv7Y7QV79Gc'
 // 查看商品列表
@@ -58,7 +58,7 @@ export const getOrderApi = (params) => {
 }
 // 查看商家信息 //需要登录
 export const getSettingInfoApi = (params) => {
-  return axios.get(`/shop/setting/info`)
+  return axios.get(`/customer/shopInfo`)
 }
 // 排队拿号
 export const applyTableApi = ({tableType}) => {
@@ -110,10 +110,9 @@ export const webSocketApi = (callBack) => {
     if (event.data === 'updateCart') {
       // 更新购物车
       callBack()
-      console.log('==========updateCart')
     } else if (event.data === 'placed') {
       // 跳转到订单页面
-      window.location.href = '/#/order-pay'
+      window.location.href = '/wechat/#/order-pay'
     } else if (event.data === 'paid') {
       // 跳转到已支付页面（直接跳转到这个链接 http://order.voltmao.com/api/pay/success.html 就行）
       window.location.href = 'http://order.voltmao.com/api/pay/success.html'

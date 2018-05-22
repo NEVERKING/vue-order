@@ -7,7 +7,7 @@ app.use('/static', express.static('./dist/static'));
 app.use(cookieParser())
 app.get('*', function (req, res) {
   if (!req.cookies.openId) {
-    res.redirect(`http://120.78.165.70/wechat/authorize?returnUrl=${'http://47.98.212.129:8080/#/?tableId=37'}`);
+    res.redirect(`http://order.voltmao.com/api/wechat/authorize?returnUrl=${window.location.href}`);
   } else {
     res.sendfile('./dist/index.html');
   }
@@ -16,7 +16,7 @@ app.get('*', function (req, res) {
 //   return axios.post(`/wechat/authorize?returnUrl=${returnUrl}`)
 // }
 
-var server = app.listen(8080, function () {
+var server = app.listen(8090, function () {
   var host = server.address().address;
   var port = server.address().port;
 

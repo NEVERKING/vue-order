@@ -29,7 +29,6 @@
 </template>
 <script>
 import { choiceeatApi } from '@/api'
-import Cookies from 'js-cookie'
 export default {
   data () {
     return {
@@ -43,10 +42,6 @@ export default {
         [9, 10, 11, '...']
       ]
     }
-  },
-  created () {
-    this.tableId = this.$route.query.tableId
-    Cookies.set('tableId', this.$route.query.tableId)
   },
   methods: {
     checkSeat (value) {
@@ -62,7 +57,7 @@ export default {
           mes: data.msg,
           timeout: 3000
         })
-        this.$router.push({path: '/', query: { tableId: this.tableId }})
+        this.$router.push({path: '/'})
       }).catch((err) => {
         console.log(err)
       })
@@ -74,7 +69,7 @@ export default {
           mes: data.msg,
           timeout: 3000
         })
-        this.$router.push({path: '/', query: { tableId: this.tableId }})
+        this.$router.push({path: '/'})
       }).catch((err) => {
         this.$dialog.notify({
           mes: err.response.msg,

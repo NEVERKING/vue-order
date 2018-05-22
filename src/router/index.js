@@ -15,6 +15,7 @@ import Pay from '@/components/Pay'
 Vue.use(Router)
 
 export default new Router({
+  baseUrl: '/wechat/',
   routes: [
     {
       path: '/',

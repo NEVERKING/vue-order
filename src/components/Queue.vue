@@ -1,23 +1,49 @@
 <template>
+  <div style="width: 100%">
     <div v-title="'餐厅详情'" class="queue-box">
-        <h2>排号</h2>
-        <yd-flexbox style='margin-top: .5rem' v-for='(item, key) in queues' :key='key'>
-            <yd-flexbox-item v-for='(queue, key1) in item' :key='key1'>
-                <div @click="choiceTable(queue.tableType)" class="info">
-                    <h3>{{types[queue.tableType]}}桌</h3>
-                    <p>{{info[queue.tableType]}}</p>
-                    <p style="color: #808080">当前等待{{queue.peopleNumber}}桌</p>
-                </div>
-            </yd-flexbox-item>
-        </yd-flexbox>
-        <div class="conect">
-            <p>取号规则:{{data.queueDescription}}</p>
-            <p><a :href="'tel:'+data.shopTel">联系电话:{{data.shopTel}}</a></p>
-        </div>
+      <div style="background-color: #ffffff;">
+        <h2 style="padding-top: .5rem;">排号</h2>
+      </div>
+      <hr style="height: 1px;border: 2px #d4d4d4;">
+      <div>
+        <yd-grids-group :rows="2" style="border: 2px #d4d4d4;">
+          <div v-for='(item,key) in queues' :key='key'>
+            <yd-grids-item v-for='(queue, key) in item' :key='key'>
+            <span slot="text">
+              <div @click="choiceTable(queue.tableType)">
+                <h3>{{types[queue.tableType]}}桌</h3>
+                <p>{{info[queue.tableType]}}</p>
+                <p style="color: #808080">当前等待{{queue.peopleNumber}}桌</p>
+              </div>
+            </span>
+            </yd-grids-item>
+          </div>
+        </yd-grids-group>
+      </div>
     </div>
+    <div style="margin-top: 1rem;width: 100%">
+      <yd-cell-group>
+        <yd-cell-item>
+          <span slot="left" style="color:#808080">
+            <yd-icon size='.4rem' color='#c9c9c9' name="question"></yd-icon>
+            取号规则:
+          </span>
+          <span slot="right" style="color:#808080">{{data.queueDescription}}</span>
+        </yd-cell-item>
+        <yd-cell-item>
+          <span slot="left" style="color:#808080">
+            <yd-icon size='.4rem' color='#c9c9c9' name="phone2"></yd-icon>
+            联系电话:
+          </span>
+          <span slot="right" style="color:#808080"><a :href="'tel:'+data.shopTel">{{data.shopTel}}</a></span>
+        </yd-cell-item>
+      </yd-cell-group>
+    </div>
+  </div>
 </template>
 <script>
-import { getSettingInfoApi, applyTableApi, queueApi } from '@/api'
+import {getSettingInfoApi, applyTableApi, queueApi} from '@/api'
+
 export default {
   data () {
     return {
@@ -64,26 +90,19 @@ export default {
 }
 </script>
 <style scoped>
-    .queue-box{
-        width: 100%;
-        margin-top: 2rem;
-    }
-    .queue-box h2 {
-        padding: 0 0 .6rem 0;
-        font-size: .4rem;
-    }
-    .queue-box h3 {
-        font-size: .38rem;
-    }
-    .queue-box .info {
-        width: 2.8rem;
-        background-color: #ffffff;
-        margin: auto;
-        padding: .4rem 0;
-        border: 1px solid #dedede;
-    }
-    .queue-box .conect {
-        text-align: left;
-        padding: .6rem .4rem;
-    }
+  .queue-box {
+    width: 75%;
+    margin: .8rem auto auto;
+    border-bottom: 0;
+  }
+
+  .queue-box h2 {
+    padding: 0 0 .6rem 0;
+    font-size: .4rem;
+  }
+
+  .queue-box h3 {
+    font-size: .38rem;
+  }
+
 </style>

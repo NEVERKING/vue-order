@@ -55,7 +55,6 @@
 <script>
 import { mapMutations, mapState, mapActions } from 'vuex'
 import moment from 'moment'
-import Cookies from 'js-cookie'
 import { getOrderApi, webSocketApi } from '@/api'
 export default {
   data () {
@@ -91,7 +90,7 @@ export default {
       changeCar: 'ADD_CAR'
     }),
     dishes () {
-      this.$router.push({path: '/', query: {tableId: Cookies.get('tableId')}})
+      this.$router.push({path: '/'})
     },
     getOrder () {
       this.$router.push({path: '/pay'})

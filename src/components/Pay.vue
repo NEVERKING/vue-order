@@ -2,7 +2,7 @@
   <div style="width: 100%">
     <yd-flexbox direction="vertical">
       <div class="header">
-        <!--<h3>向阳小酒馆</h3>-->
+        <!--<h3>店铺名称</h3>-->
         <p>{{mapping[data.tableType]}}{{data.tableId}}桌{{data.peopleNumber}}人</p>
         <h1>¥{{data.orderMoney && data.orderMoney.toFixed(2)}}</h1>
       </div>
