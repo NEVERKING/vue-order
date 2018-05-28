@@ -1,5 +1,5 @@
 <template>
-<div class="button-box">
+<div class="button-box"  v-title="'选择就餐人数'">
     <h3>请选择就餐人数</h3>
     <yd-flexbox v-for="(item, key) in buttonList" :key="key">
         <yd-flexbox-item class="button-item" v-for="(button, key2) in item" :key="key2">

@@ -11,6 +11,7 @@ import Apply from '@/components/Apply'
 import Success from '@/components/Success'
 import OrderPay from '@/components/OrderPay'
 import Pay from '@/components/Pay'
+import History from '@/components/History'
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
       path: '/pay',
       name: 'Pay',
       component: Pay
+    },
+    {
+      path: '/history',
+      name: 'History',
+      component: History
     }
   ]
 })

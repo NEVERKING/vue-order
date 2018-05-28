@@ -1,6 +1,6 @@
 <template>
     <yd-flexbox class="order-box" direction="vertical">
-        <div class="base-info">
+        <div class="base-info"  v-title="'确认订单'">
             <h3>桌号:{{mapping[orderData.tableType]}}{{orderData.tableId}}</h3>
             <p>菜品种类:{{myShopCar.length}}种</p>
             <yd-flexbox class="edit-box" direction="horizontal">

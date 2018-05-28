@@ -1,56 +1,61 @@
 <template>
-    <yd-flexbox>
+  <yd-flexbox style="background-color: #ffffff">
     <yd-scrollnav>
-            <yd-scrollnav-panel :label='item.name' v-for='(item, key) in list' :key='key'>
-                <!-- 内容 -->
-                <h2>{{item.name}}</h2>
-                <yd-list :theme='3'>
-                    <yd-list-item v-for='product in item.foods' :key='product.id'>
-                      <img v-if="product.state === 0" slot='img' :src='product.icon' @click='showDetail(product)' />
-                      <img v-if="product.state === 1" slot='img' :src='product.icon' />
-                        <yd-list-other slot='other'>
-                            <div style='width:100%'>
-                                <div class='info'>
-                                    <p class='list-name'>{{product.name}}</p>
-                                    <p class='list-price'>¥{{product.price}}</p>
-                                </div>
-                                <button v-if="product.state === 0" @click='showDetail(product)' class='add-product'>添加</button>
-                                <button v-if="product.state === 1" class='disabled-product'>售罄</button>
-                            </div>
-                        </yd-list-other>
-                    </yd-list-item>
-                </yd-list>
-                <!-- 内容 -->
-            </yd-scrollnav-panel>
-            <div style="height:1.4rem"></div>
-            <div class="footer-car">
-                <yd-flexbox class="button-info">
-                    <yd-flexbox-item class="shop-car">
+      <yd-scrollnav-panel :label='item.name' v-for='(item, key) in list' :key='key'>
+        <!-- 内容 -->
+        <div style="width: 100%;background-color: #ffffff">
+            <hr style="vertical-align:middle; display:inline-block; padding-left: 1rem;"/>
+            <h1 style="font-size: small;margin-left: 2%;margin-right: 2%;display: inline-block">{{item.name}}</h1>
+            <hr style="vertical-align:middle; display:inline-block; padding-right: 1rem;"/>
+        </div>
+        <yd-list :theme='3' style="background-color: #ffffff">
+          <yd-list-item v-for='product in item.foods' :key='product.id'>
+            <img v-if="product.state === 0" slot='img' :src='product.icon' @click='showDetail(product)'/>
+            <img v-if="product.state === 1" slot='img' :src='product.icon'/>
+            <yd-list-other slot='other'>
+              <div style='width:100%'>
+                <div class='info'>
+                  <p class='list-name'>{{product.name}}</p>
+                  <p class='list-price'>¥{{product.price}}</p>
+                </div>
+                <button v-if="product.state === 0" @click='showDetail(product)' class='add-product'>添加</button>
+                <button v-if="product.state === 1" class='disabled-product'>售罄</button>
+              </div>
+            </yd-list-other>
+          </yd-list-item>
+        </yd-list>
+        <!-- 内容 -->
+      </yd-scrollnav-panel>
+      <div style="height:1.4rem"></div>
+      <div class="footer-car">
+        <yd-flexbox class="button-info">
+          <yd-flexbox-item class="shop-car">
                         <span @click='showShopCar'>
-                        <yd-icon name="order"></yd-icon>
+                          <yd-icon :name="myShopCar.length === 0 ? 'shopcart-outline': 'shopcart'"></yd-icon>
                         <span>已点了{{myShopCar.length}}个菜</span>
                         </span>
-                    </yd-flexbox-item>
-                    <yd-flexbox-item class="text-right">
-                        <yd-button @click.native="linkOrder" type="danger">选好了</yd-button>
-                    </yd-flexbox-item>
-                </yd-flexbox>
-            </div>
-            <yd-backtop></yd-backtop>
-        </yd-scrollnav>
-        <show-detail :productDetail= 'productDetail' ></show-detail>
-        <show-car></show-car>
-        <div @click='linkPage()'>
-            <yd-icon name='search' class="search"></yd-icon>
-        </div>
-    </yd-flexbox>
+          </yd-flexbox-item>
+          <yd-flexbox-item class="text-right">
+            <yd-button @click.native="linkOrder" type="danger">选好了</yd-button>
+          </yd-flexbox-item>
+        </yd-flexbox>
+      </div>
+      <yd-backtop></yd-backtop>
+    </yd-scrollnav>
+    <show-detail :productDetail='productDetail'></show-detail>
+    <show-car></show-car>
+    <div @click='linkPage()'>
+      <yd-icon name='search' class="search"></yd-icon>
+    </div>
+  </yd-flexbox>
 </template>
 
 <script>
-import { getProductListApi, webSocketApi } from '@/api'
+import {getProductListApi, webSocketApi} from '@/api'
 import ShowDetail from './ShowDetail'
 import ShowCar from './ShowCar'
 import {mapMutations, mapState, mapActions} from 'vuex'
+
 export default {
   data () {
     return {
@@ -65,7 +70,7 @@ export default {
   },
   created () {
     getProductListApi()
-      .then(({ data }) => {
+      .then(({data}) => {
         this.list = data.data
       })
       .catch(err => {
@@ -114,62 +119,74 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  padding: 0.15rem 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.list-name {
-  color: #4c4c4c;
-  text-align: left;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-.list-price {
-  text-align: left;
-}
-.add-product {
-  display: block;
-  text-align: center;
-  width: 100%;
-  border: 1px solid #ef4f4f;
-  padding: 0.1rem 0;
-  border-radius: 4px;
-  color: #ef4f4f;
-}
-.disabled-product {
-  display: block;
-  text-align: center;
-  width: 100%;
-  border: 1px solid #808080;
-  padding: 0.1rem 0;
-  border-radius: 4px;
-  color: #808080;
-}
-.info {
-  height: 0.8rem;
-}
-.shop-car {
+  h1,
+  h2 {
+    padding: 0.2rem 0;
+    background-color: #ffffff;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #42b983;
+  }
+
+  .list-name {
+    color: #4c4c4c;
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .list-price {
+    text-align: left;
+  }
+
+  .add-product {
+    display: block;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #ef4f4f;
+    padding: 0.1rem 0;
+    border-radius: 4px;
+    color: #ef4f4f;
+  }
+
+  .disabled-product {
+    display: block;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #808080;
+    padding: 0.1rem 0;
+    border-radius: 4px;
+    color: #808080;
+  }
+
+  .info {
+    height: 0.8rem;
+  }
+
+  .shop-car {
     color: #ef4f4f;
     font-size: .34rem;
     text-align: left;
-}
-.text-right{
+  }
+
+  .text-right {
     text-align: right;
-}
-.search {
+  }
+
+  .search {
     position: fixed;
     bottom: 180px;
     width: 1rem;
@@ -180,13 +197,14 @@ a {
     padding-top: .14rem;
     border-radius: 999px;
     border: 1px solid #ef4f4f;
-}
-.footer-car {
+  }
+
+  .footer-car {
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #fff;
     padding: .15rem .4rem;
     border-top: 1px solid #dedede;
-}
+  }
 </style>

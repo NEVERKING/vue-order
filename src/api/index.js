@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 axios.defaults.baseURL = 'http://order.voltmao.com/api'
 axios.defaults.headers.common['Authorization'] = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiMjAxOCIsInVuaXF1ZV9uYW1lIjoiMjAxOCIsInVzZXJpZCI6IjIwMTgiLCJpc3MiOiJyZXN0YXBpdXNlciIsImF1ZCI6IjA5OGY2YmNkNDYyMWQzNzNjYWRlNGU4MzI2MjdiNGY2IiwiZXhwIjoxNTI2OTYwNjEzLCJuYmYiOjE1MjY3ODc4MTN9.NhRUDwOLxuLLgUiAcR9cjZlqaeqGLNKnfqDGc0_dUZU'
-const openId = Cookies.get('openId') || 'oOojD1L0z3FdADqZKjv7Y7QV79Gc'
+const openId = Cookies.get('openId')
 // 查看商品列表
 export const getProductListApi = () => {
   return axios.get('/customer/ordermeal/list')
@@ -56,7 +56,7 @@ export const placeApi = (params) => {
 export const getOrderApi = (params) => {
   return axios.get(`/customer/ordermeal/order?tableId=${Cookies.get('tableId')}`)
 }
-// 查看商家信息 //需要登录
+// 查看商家信息
 export const getSettingInfoApi = (params) => {
   return axios.get(`/customer/shopInfo`)
 }
@@ -88,6 +88,11 @@ export const cancelQueueApi = () => {
 export const updateSeatApi = ({peopleNumber}) => {
   return axios.post(`/customer/ordermeal/updateSeat?tableId=${Cookies.get('tableId')}&peopleNumber=${peopleNumber}`)
 }
+// 查看历史订单
+export const listApi = () => {
+  return axios.get(`/customer/order/list?openId=${openId}`)
+}
+
 // webSocket
 export const webSocketApi = (callBack) => {
   var websocket = null

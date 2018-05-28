@@ -1,5 +1,5 @@
 <template>
-    <div class='flex-box'>
+    <div class='flex-box'  v-title="'搜索菜品'">
         <yd-search v-model="value" placeholder="请输入菜品名或口味" cancel-text="确定" :on-cancel="submitHandler" :on-submit="submitHandler"></yd-search>
         <div :class="[list.length == 0 ? 'item-center list-box' : 'list-box']">
             <p v-if="list.length == 0" class="text-aligin:center">暂无数据</p>

@@ -1,6 +1,6 @@
 <template>
     <yd-flexbox class="success">
-        <div>
+        <div v-title="'订单提交成功'">
             <yd-icon size="1.6rem" color="#44c125" name="checkoff"></yd-icon>
             <h3>订单提交成功</h3>
             <p>您的点菜已经发送给餐厅服务员确认</p>

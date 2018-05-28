@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%">
-    <div v-title="'餐厅详情'" class="queue-box">
+    <div v-title="'排队取号'" class="queue-box">
       <div style="background-color: #ffffff;">
         <h2 style="padding-top: .5rem;">排号</h2>
       </div>

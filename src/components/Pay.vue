@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%">
+  <div style="width: 100%"  v-title="'支付订单'">
     <yd-flexbox direction="vertical">
       <div class="header">
         <!--<h3>店铺名称</h3>-->

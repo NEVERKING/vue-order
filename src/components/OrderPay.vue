@@ -1,6 +1,6 @@
 <template>
   <yd-flexbox class="order-box" direction="vertical">
-    <div class="base-info">
+    <div class="base-info"  v-title="'订单'">
       <h3>桌号:{{mapping[data.tableType]}}{{data.tableId}}</h3>
     </div>
     <yd-flexbox-item class="order-detail">
